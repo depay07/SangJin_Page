@@ -34,7 +34,8 @@ function DesktopDropdown({
         {label}
       </button>
       {open && (
-        <div className="absolute left-0 mt-2 w-44 overflow-hidden rounded-lg border border-white/10 bg-[#142f66] shadow-xl">
+        <div className="absolute left-0 top-full pt-2">
+          <div className="w-44 overflow-hidden rounded-lg border border-white/10 bg-[#142f66] shadow-xl">
           {items.map((n) => (
             <Link
               key={n.href}
@@ -44,6 +45,7 @@ function DesktopDropdown({
               {n.label}
             </Link>
           ))}
+          </div>
         </div>
       )}
     </div>
