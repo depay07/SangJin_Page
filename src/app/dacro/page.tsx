@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 import { DACRO_EQUIPMENT } from "@/components/sites/gmsangjin/data";
+
+export const metadata: Metadata = {
+  title: "DACRO 표면처리 | SPIN·DIP·TILTI 코터·자동라인·제어시스템",
+  description:
+    "DACRO(다크로) 설비 전문: SPIN·DIP·TILTI 코터, 지오메트 자동라인, ROBOT CARRIER, 도료공급·세척·쇼트와 PLC 제어시스템·HMI·전기판넬 일괄 시공.",
+};
 
 const EXTRA = [
   { title: "COATER LINE 현장", img: "/sites/gmsangjin/slides/coaterline-3.jpg" },
@@ -20,7 +27,7 @@ export default function DacroPage() {
         <SectionTitle
           kicker="Dacro plant"
           title="표면처리 설비 부문"
-          desc="1) COATING 장치  2) COATING LINE (지오메트 하드 자동 LINE)  3) 세척장비  4) 쇼트설비"
+          desc="1) COATING 장치  2) COATING LINE (지오메트 하드 자동 LINE)  3) 세척장비  4) 쇼트설비 — PLC 제어시스템·전기판넬제작·HMI·전기공사 포함"
         />
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           {DACRO_EQUIPMENT.map((e) => (

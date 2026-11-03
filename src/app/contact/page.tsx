@@ -30,6 +30,7 @@ export default function ContactPage() {
               </div>
             </dl>
             <p className="mt-6 text-sm leading-7 text-neutral-600">
+              전기제어시스템·PLC 제어프로그램·전기판넬제작·전기공사,
               DACRO·도장·자동제어 설비의 설계부터 시운전까지 일괄 수행합니다.
               신규 설비계획이 있으시면 전화로 먼저 문의해 주세요. 신속한 A/S를
               약속드립니다.

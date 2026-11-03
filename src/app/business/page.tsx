@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 import { PAINT_EQUIPMENT, BUSINESS_TREE } from "@/components/sites/gmsangjin/data";
+
+export const metadata: Metadata = {
+  title: "도장설비 | 전처리·도장부스·건조로·전기제어 턴키 (PLC·HMI)",
+  description:
+    "도장설비 전문: 전처리·전착·도장부스(액체·분체)·건조로·급배기 설비의 전기제어시스템(PLC·HMI·전기판넬제작·전기공사) 턴키 시공. 지엠상진.",
+};
 
 export default function BusinessPage() {
   return (
@@ -12,7 +19,7 @@ export default function BusinessPage() {
         <SectionTitle
           kicker="Map"
           title="도장설비 계통"
-          desc="전처리 · 전착 · PAINT BOOTH · 건조 · 환경 · CONVEYOR"
+          desc="전처리 · 전착 · PAINT BOOTH · 건조 · 환경 · CONVEYOR — 각 설비의 전기제어시스템(PLC 제어프로그램·HMI·전기판넬제작·전기공사)까지 포함한 턴키 시공"
         />
         <div className="mt-6 overflow-hidden rounded-2xl border">
           <Image

@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
 import { COMPANY_NAV, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
+
+export const metadata: Metadata = {
+  title: "전기제어·전기제어시스템·PLC·전기판넬제작·전기공사 전문",
+  description:
+    "전기제어시스템 설계부터 PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사까지. 도장설비·DACRO·공장자동화 턴키 시공 지엠상진. 견적 031-432-8778.",
+};
 
 const PILLARS = [
   {
@@ -95,6 +102,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 전기제어 소개 (SEO) */}
+      <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-6">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-blue-700">
+          Electric control systems
+        </p>
+        <h2 className="mt-1 text-2xl font-extrabold sm:text-3xl">
+          전기제어시스템부터 전기공사까지 한 번에
+        </h2>
+        <p className="mt-3 max-w-4xl text-sm leading-7 text-neutral-600">
+          지엠상진은 전기제어 전문 기업으로, 제어시스템 기본·상세 설계, PLC
+          제어프로그램 작성, 전기판넬제작(HMI·계장제작 포함), 현장 전기공사와
+          시운전을 일괄 수행합니다. 도장설비(전처리·전착·도장부스·건조로·급배기),
+          DACRO 표면처리(SPIN·DIP·TILTI 코터), 공장자동화(FA) 라인까지
+          기계·전기 통합 턴키로 맡기실 수 있습니다. 자동차 부품·전자제품
+          도장라인을 국내는 물론 중국·폴란드·일본·베트남·미국·인도·브라질에
+          시공한 실적을 <Link href="/references" className="font-bold text-blue-800 underline">시공실적</Link>에서
+          확인하세요.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2 text-xs font-bold text-neutral-600">
+          {["전기제어", "전기제어시스템", "제어시스템", "전기판넬제작", "PLC", "제어프로그램", "전기공사", "자동제어", "공장자동화", "HMI", "도장설비", "DACRO"].map((k) => (
+            <span key={k} className="rounded-full border px-3 py-1.5">{k}</span>
+          ))}
+        </div>
+      </section>
+
       {/* 사이트맵 */}
       <section className="border-y bg-neutral-50">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
@@ -110,6 +142,40 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 자주 묻는 질문 (SEO) */}
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <h2 className="text-xl font-extrabold">전기제어·도장설비 자주 묻는 질문</h2>
+        <div className="mt-5 space-y-3">
+          {[
+            {
+              q: "전기제어시스템 설계부터 시공까지 가능한가요?",
+              a: "가능합니다. 제어시스템 기본·상세 설계, PLC 제어프로그램, 계장제작, 전기판넬제작, 현장 전기공사와 시운전을 자동제어 사업부에서 일괄 수행합니다.",
+            },
+            {
+              q: "전기판넬제작(PLC 판넬, HMI 포함) 주문제작이 되나요?",
+              a: "됩니다. 컨트롤 판넬 구성과 HMI 화면 구성까지 주문사양에 맞춰 제작하며, 기존 설비의 판넬 교체·증설도 수행합니다.",
+            },
+            {
+              q: "PLC 제어프로그램 수정이나 유지보수도 하나요?",
+              a: "합니다. 프로그램 신규 작성은 물론 기존 제어프로그램 수정, 신속한 A/S와 자율적 순회점검으로 사후 관리까지 지원합니다.",
+            },
+            {
+              q: "도장설비 전기공사는 어디까지 포함되나요?",
+              a: "전처리·전착·도장부스·건조로·급기·배기(환경) 설비의 전기제어와 기계설치를 포함한 턴키 시공이 가능합니다. 사업분야 페이지에서 설비별 구성을 확인하세요.",
+            },
+            {
+              q: "견적 문의는 어떻게 하나요?",
+              a: `전화 ${COMPANY.tel} 또는 고객문의 페이지에서 설비 종류·물량·희망 일정을 남겨주세요. 본사는 ${COMPANY.address}에 있습니다.`,
+            },
+          ].map((f) => (
+            <details key={f.q} className="rounded-xl border bg-white px-5 py-4">
+              <summary className="cursor-pointer font-bold">{f.q}</summary>
+              <p className="mt-2 text-sm leading-7 text-neutral-600">{f.a}</p>
+            </details>
+          ))}
         </div>
       </section>
 
