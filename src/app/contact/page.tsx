@@ -23,6 +23,12 @@ export default function ContactPage() {
                 </dd>
               </div>
               <div>
+                <dt className="font-bold">이메일</dt>
+                <dd>
+                  <a href={`mailto:${COMPANY.email}`} className="underline">{COMPANY.email}</a>
+                </dd>
+              </div>
+              <div>
                 <dt className="font-bold">대표 / 설립</dt>
                 <dd className="text-neutral-600">
                   {COMPANY.ceo} / {COMPANY.founded} / {COMPANY.businessType}

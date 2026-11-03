@@ -22,6 +22,7 @@ export const COMPANY = {
   tel: "031-432-8778",
   fax: "031-432-8779",
   mobile: "010-8228-4252",
+  email: "gm-sangjin@naver.com",
   siteArea: "대지 326㎡",
   buildingArea: "건물 438㎡(4층)",
   capital: "2억",

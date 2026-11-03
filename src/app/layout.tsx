@@ -61,6 +61,7 @@ function JsonLd() {
       addressCountry: "KR",
     },
     telephone: `+82-10-8228-4252`,
+    email: COMPANY.email,
     foundingDate: "2015-12",
   };
   return (

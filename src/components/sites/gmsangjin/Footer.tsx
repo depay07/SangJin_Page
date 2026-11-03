@@ -26,6 +26,11 @@ export function SiteFooter() {
           <br />
           T. {COMPANY.tel} | F. {COMPANY.fax} | 대표전화 {COMPANY.mobile} | 대표 : {COMPANY.ceo} |
           설립 {COMPANY.founded}
+          <br />
+          이메일:{" "}
+          <a href={`mailto:${COMPANY.email}`} className="underline">
+            {COMPANY.email}
+          </a>
         </p>
         <p className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-neutral-500">
           Copyright © 2026 -{" "}
