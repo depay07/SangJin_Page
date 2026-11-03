@@ -7,7 +7,7 @@ import { COMPANY_NAV, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 export const metadata: Metadata = {
   title: "전기제어·전기제어시스템·PLC·전기판넬제작·전기공사 전문",
   description:
-    "전기제어시스템 설계부터 PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사까지. 도장설비·DACRO·공장자동화 턴키 시공 지엠상진. 견적 031-432-8778.",
+    "전기제어시스템 설계부터 PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사까지. 도장설비·DACRO·공장자동화 턴키 시공 지엠상진. 대표전화 010-8228-4252.",
 };
 
 const PILLARS = [
@@ -75,7 +75,7 @@ export default function Home() {
               href="/contact"
               className="rounded-md border border-white/40 px-6 py-3 text-sm font-bold hover:bg-white/10"
             >
-              견적 문의 {COMPANY.tel}
+              견적 문의 {COMPANY.mobile}
             </Link>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function Home() {
             },
             {
               q: "견적 문의는 어떻게 하나요?",
-              a: `전화 ${COMPANY.tel} 또는 고객문의 페이지에서 설비 종류·물량·희망 일정을 남겨주세요. 본사는 ${COMPANY.address}에 있습니다.`,
+              a: `대표전화 ${COMPANY.mobile} 또는 고객문의 페이지에서 설비 종류·물량·희망 일정을 남겨주세요. 본사는 ${COMPANY.address}에 있습니다.`,
             },
           ].map((f) => (
             <details key={f.q} className="rounded-xl border bg-white px-5 py-4">
@@ -184,7 +184,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-14 text-center sm:px-6">
           <h2 className="text-2xl font-extrabold">신규 설비계획이 있으신가요?</h2>
           <p className="text-sm text-blue-100">
-            본사 {COMPANY.address} / T. {COMPANY.tel} / F. {COMPANY.fax}
+            본사 {COMPANY.address} / 대표전화 {COMPANY.mobile} / T. {COMPANY.tel} · F. {COMPANY.fax}
           </p>
           <Link
             href="/contact"

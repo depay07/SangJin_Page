@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/sites/gmsangjin/Header";
 import { SiteFooter } from "@/components/sites/gmsangjin/Footer";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
 
-const SITE_URL = "https://gmsangjin.kr";
+const SITE_URL = "https://sagjin-fa.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | 지엠상진 전기제어·자동제어 전문",
   },
   description:
-    "전기제어시스템 설계·제작·시공 전문 지엠상진. PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사, DACRO·도장설비(액체·분체·전착·전처리) 턴키 시공. 시흥 본사 031-432-8778.",
+    "전기제어시스템 설계·제작·시공 전문 지엠상진. PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사, DACRO·도장설비(액체·분체·전착·전처리) 턴키 시공. 대표전화 010-8228-4252.",
   keywords: [
     "전기제어",
     "전기제어시스템",
@@ -60,7 +60,7 @@ function JsonLd() {
       streetAddress: COMPANY.address,
       addressCountry: "KR",
     },
-    telephone: `+82-${COMPANY.tel}`,
+    telephone: `+82-10-8228-4252`,
     foundingDate: "2015-12",
   };
   return (

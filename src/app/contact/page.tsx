@@ -19,7 +19,7 @@ export default function ContactPage() {
               <div>
                 <dt className="font-bold">전화 / 팩스</dt>
                 <dd className="text-neutral-600">
-                  T. {COMPANY.tel} / F. {COMPANY.fax}
+                  대표전화 {COMPANY.mobile} / T. {COMPANY.tel} / F. {COMPANY.fax}
                 </dd>
               </div>
               <div>
@@ -50,7 +50,7 @@ export default function ContactPage() {
             </label>
             <label className="mt-3 block text-sm font-bold">문의 내용<textarea rows={5} className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="설비 종류, 물량, 희망 일정 등을 적어 주세요." /></label>
             <button type="submit" className="mt-4 w-full rounded-md bg-[#0e2a63] py-3 text-sm font-bold text-white">보내기</button>
-            <p className="mt-2 text-xs text-neutral-500">* 데모용 폼입니다. 실제 문의는 T. {COMPANY.tel} 로 연락 부탁드립니다.</p>
+            <p className="mt-2 text-xs text-neutral-500">* 데모용 폼입니다. 실제 문의는 대표전화 {COMPANY.mobile} 로 연락 부탁드립니다.</p>
           </form>
         </div>
       </section>
