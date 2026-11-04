@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/sites/gmsangjin/Header";
 import { SiteFooter } from "@/components/sites/gmsangjin/Footer";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
 
-const SITE_URL = "https://sagjin-fa.com";
+const SITE_URL = "https://sangjin-fa.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
