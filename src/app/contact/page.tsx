@@ -1,9 +1,59 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { PageHero } from "@/components/sites/gmsangjin/shared";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
 
+type Status = { kind: "idle" | "sending" | "done" | "error"; text: string };
+
 export default function ContactPage() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
+  const [sending, setSending] = useState(false);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form || sending) return;
+    if (!form.reportValidity()) return;
+    const honey = (form.elements.namedItem("_honey") as HTMLInputElement)?.value;
+    if (honey) return;
+
+    setSending(true);
+    setStatus({ kind: "sending", text: "문의 내용을 전송하고 있습니다." });
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${COMPANY.email}`,
+        { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form), signal: controller.signal }
+      );
+      if (!response.ok) throw new Error("send failed");
+      const result = await response.json();
+      if (result.success !== true && result.success !== "true") throw new Error("not accepted");
+      form.reset();
+      setStatus({
+        kind: "done",
+        text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
+      });
+    } catch {
+      setStatus({
+        kind: "error",
+        text: `전송을 확인하지 못했습니다. 잠시 후 다시 시도하거나 ${COMPANY.email} 또는 ${COMPANY.mobile}로 문의해주세요.`,
+      });
+    } finally {
+      window.clearTimeout(timer);
+      setSending(false);
+    }
+  }
+
+  const statusColor =
+    status.kind === "done"
+      ? "text-green-700"
+      : status.kind === "error"
+        ? "text-red-600"
+        : "text-blue-700";
+
   return (
     <main>
       <PageHero title="고객문의" en="Contact" />
@@ -42,21 +92,28 @@ export default function ContactPage() {
               약속드립니다.
             </p>
           </div>
-          <form className="rounded-2xl border p-6" onSubmit={(e) => e.preventDefault()}>
+          <form ref={formRef} onSubmit={onSubmit} className="rounded-2xl border p-6">
             <h2 className="text-xl font-extrabold">문의하기</h2>
-            <label className="mt-4 block text-sm font-bold">이름 *<input required className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="성함" /></label>
-            <label className="mt-3 block text-sm font-bold">연락처 *<input required className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="010-0000-0000" /></label>
+            <input type="hidden" name="_subject" value="지엠상진 홈페이지 문의" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+            <label className="mt-4 block text-sm font-bold">이름 *<input name="이름" required className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="성함" /></label>
+            <label className="mt-3 block text-sm font-bold">연락처 *<input name="연락처" required className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="010-0000-0000" /></label>
             <label className="mt-3 block text-sm font-bold">관심 분야
-              <select className="mt-1 w-full rounded-md border px-3 py-2 font-normal">
+              <select name="관심분야" className="mt-1 w-full rounded-md border px-3 py-2 font-normal">
                 <option>DACRO 설비 (SPIN/DIP/TILTI)</option>
                 <option>도장설비 (액체/분체/전착/전처리)</option>
                 <option>자동제어 (판넬/HMI)</option>
                 <option>기타 문의</option>
               </select>
             </label>
-            <label className="mt-3 block text-sm font-bold">문의 내용<textarea rows={5} className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="설비 종류, 물량, 희망 일정 등을 적어 주세요." /></label>
-            <button type="submit" className="mt-4 w-full rounded-md bg-[#0e2a63] py-3 text-sm font-bold text-white">보내기</button>
-            <p className="mt-2 text-xs text-neutral-500">* 데모용 폼입니다. 실제 문의는 대표전화 {COMPANY.mobile} 로 연락 부탁드립니다.</p>
+            <label className="mt-3 block text-sm font-bold">문의 내용<textarea name="문의내용" rows={5} className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="설비 종류, 물량, 희망 일정 등을 적어 주세요." /></label>
+            <button type="submit" disabled={sending} className="mt-4 w-full rounded-md bg-[#0e2a63] py-3 text-sm font-bold text-white disabled:opacity-60">
+              {sending ? "전송 중..." : "보내기"}
+            </button>
+            {status.text && (
+              <p className={`mt-3 text-sm leading-6 ${statusColor}`}>{status.text}</p>
+            )}
           </form>
         </div>
       </section>
