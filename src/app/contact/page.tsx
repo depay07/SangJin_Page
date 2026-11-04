@@ -14,7 +14,7 @@ const WEB3FORMS_KEY = "";
 const ERP_INQUIRY_URL =
   "https://gqttpmdpqotrkbdbstuu.supabase.co/functions/v1/website-inquiry";
 
-async function saveToErp(target: HTMLFormElement) {
+async function saveToErp(target: HTMLFormElement): Promise<boolean> {
   try {
     const data = new FormData(target);
     const name = String(data.get("이름") ?? "");
@@ -22,22 +22,32 @@ async function saveToErp(target: HTMLFormElement) {
     const interest = String(data.get("관심분야") ?? "");
     const msg = String(data.get("문의내용") ?? "");
     const message = `[${interest}] ${name}(${phone}) ${msg}`.trim();
-    if (message.length < 10) return;
-    await fetch(ERP_INQUIRY_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        request_id: crypto.randomUUID(),
-        inquiry_type: interest || "지엠상진 홈페이지 문의",
-        message,
-        contact: `${name} ${phone}`.trim(),
-        source_page: window.location.href,
-        source: "sangjin",
-        website: "",
-      }),
-    });
+    if (message.length < 10) return false;
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(ERP_INQUIRY_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          request_id: crypto.randomUUID(),
+          inquiry_type: interest || "지엠상진 홈페이지 문의",
+          message,
+          contact: `${name} ${phone}`.trim(),
+          source_page: window.location.href,
+          source: "sangjin",
+          website: "",
+        }),
+        signal: controller.signal,
+      });
+      if (!response.ok) return false;
+      const result = await response.json().catch(() => null);
+      return result?.ok === true;
+    } finally {
+      window.clearTimeout(timer);
+    }
   } catch {
-    // 백업 실패는 메일 흐름에 영향 없음
+    return false;
   }
 }
 
@@ -73,15 +83,14 @@ export default function ContactPage() {
 
     setSending(true);
     setStatus({ kind: "sending", text: "문의 내용을 전송하고 있습니다." });
-    void saveToErp(form);
+    const snapshot = new FormData(form);
 
-    async function trySend(target: HTMLFormElement): Promise<{ ok: boolean; needsActivation: boolean }> {
+    async function trySend(data: FormData): Promise<{ ok: boolean; needsActivation: boolean }> {
       // 1차: Web3Forms (키가 있을 때만)
       if (WEB3FORMS_KEY) {
         const controller = new AbortController();
         const timer = window.setTimeout(() => controller.abort(), 20000);
         try {
-          const data = new FormData(target);
           const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
             headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -112,7 +121,7 @@ export default function ContactPage() {
       try {
         const response = await fetch(
           `https://formsubmit.co/ajax/${COMPANY.email}`,
-          { method: "POST", headers: { Accept: "application/json" }, body: new FormData(target), signal: controller.signal }
+          { method: "POST", headers: { Accept: "application/json" }, body: data, signal: controller.signal }
         );
         if (!response.ok) return { ok: false, needsActivation: false };
         const result = await response.json().catch(() => null);
@@ -128,12 +137,33 @@ export default function ContactPage() {
       }
     }
 
+    // ERP 저장이 접수 완료 기준. 메일은 백그라운드로 처리한다.
+    const erpOk = await saveToErp(form);
+    if (erpOk) {
+      form.reset();
+      setFallback("");
+      setFallbackBody("");
+      setSending(false);
+      setStatus({
+        kind: "done",
+        text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
+      });
+      void (async () => {
+        try {
+          await trySend(snapshot);
+        } catch {
+          // 메일 실패는 접수에 영향 없음
+        }
+      })();
+      return;
+    }
+
     try {
-      // 일시적 장애에 대비해 1회 재시도
-      let r = await trySend(form);
+      // ERP 실패 시 기존 메일 흐름 (1회 재시도)
+      let r = await trySend(snapshot);
       if (!r.ok && !r.needsActivation) {
         setStatus({ kind: "sending", text: "다시 전송하고 있습니다." });
-        r = await trySend(form);
+        r = await trySend(snapshot);
       }
       if (r.ok) {
         form.reset();
