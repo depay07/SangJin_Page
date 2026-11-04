@@ -39,23 +39,52 @@ export default function ContactPage() {
 
     setSending(true);
     setStatus({ kind: "sending", text: "문의 내용을 전송하고 있습니다." });
-    const controller = new AbortController();
-    const timer = window.setTimeout(() => controller.abort(), 20000);
+
+    async function trySend(target: HTMLFormElement): Promise<{ ok: boolean; needsActivation: boolean }> {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), 20000);
+      try {
+        const response = await fetch(
+          `https://formsubmit.co/ajax/${COMPANY.email}`,
+          { method: "POST", headers: { Accept: "application/json" }, body: new FormData(target), signal: controller.signal }
+        );
+        if (!response.ok) return { ok: false, needsActivation: false };
+        const result = await response.json().catch(() => null);
+        if (result?.success === true || result?.success === "true") {
+          return { ok: true, needsActivation: false };
+        }
+        const msg = String(result?.message ?? "");
+        return { ok: false, needsActivation: /activat/i.test(msg) };
+      } catch {
+        return { ok: false, needsActivation: false };
+      } finally {
+        window.clearTimeout(timer);
+      }
+    }
+
     try {
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${COMPANY.email}`,
-        { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form), signal: controller.signal }
-      );
-      if (!response.ok) throw new Error("send failed");
-      const result = await response.json();
-      if (result.success !== true && result.success !== "true") throw new Error("not accepted");
-      form.reset();
-      setFallback("");
-      setStatus({
-        kind: "done",
-        text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
-      });
-    } catch {
+      // 일시적 장애에 대비해 1회 재시도
+      let r = await trySend(form);
+      if (!r.ok && !r.needsActivation) {
+        setStatus({ kind: "sending", text: "다시 전송하고 있습니다." });
+        r = await trySend(form);
+      }
+      if (r.ok) {
+        form.reset();
+        setFallback("");
+        setStatus({
+          kind: "done",
+          text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
+        });
+        return;
+      }
+      if (r.needsActivation) {
+        throw new Error(
+          `수신邮箱(${COMPANY.email}) 승인 절차가 남아 있습니다. 메일함(스팸함 포함)의 승인 메일을 클릭한 뒤 다시 보내주세요. 급하시면 아래 버튼을 이용해주세요.`
+        );
+      }
+      throw new Error("send failed");
+    } catch (err) {
       const data = new FormData(form);
       const body = `이름: ${data.get("이름")}\n연락처: ${data.get("연락처")}\n관심분야: ${data.get("관심분야")}\n\n${data.get("문의내용")}`;
       setFallbackBody(body);
@@ -64,10 +93,12 @@ export default function ContactPage() {
       );
       setStatus({
         kind: "error",
-        text: `전송 서버가 응답하지 않습니다. 아래 버튼으로 메일 앱에서 바로 보내주세요. 또는 ${COMPANY.mobile}로 문의해주세요.`,
+        text:
+          err instanceof Error && err.message !== "send failed"
+            ? err.message
+            : `전송 서버가 응답하지 않습니다. 아래 버튼으로 메일 앱에서 바로 보내주세요. 또는 ${COMPANY.mobile}로 문의해주세요.`,
       });
     } finally {
-      window.clearTimeout(timer);
       setSending(false);
     }
   }
