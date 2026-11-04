@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: "standalone",
+  // GitHub Pages 정적 호스팅용
+  output: "export",
+  images: { unoptimized: true },
 };
 
 export default nextConfig;
