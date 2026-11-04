@@ -11,6 +11,23 @@ export default function ContactPage() {
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
   const [sending, setSending] = useState(false);
   const [fallback, setFallback] = useState("");
+  const [fallbackBody, setFallbackBody] = useState("");
+  const [copied, setCopied] = useState("");
+
+  async function copyText(text: string, which: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    setCopied(which);
+    window.setTimeout(() => setCopied(""), 2000);
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,6 +58,7 @@ export default function ContactPage() {
     } catch {
       const data = new FormData(form);
       const body = `이름: ${data.get("이름")}\n연락처: ${data.get("연락처")}\n관심분야: ${data.get("관심분야")}\n\n${data.get("문의내용")}`;
+      setFallbackBody(body);
       setFallback(
         `mailto:${COMPANY.email}?subject=${encodeURIComponent("지엠상진 홈페이지 문의")}&body=${encodeURIComponent(body)}`
       );
@@ -122,12 +140,33 @@ export default function ContactPage() {
               <p className={`mt-3 text-sm leading-6 ${statusColor}`}>{status.text}</p>
             )}
             {status.kind === "error" && fallback && (
-              <a
-                href={fallback}
-                className="mt-3 block rounded-md border border-[#0e2a63] py-3 text-center text-sm font-bold text-[#0e2a63] hover:bg-blue-50"
-              >
-                메일 앱으로 보내기
-              </a>
+              <div className="mt-3 space-y-2">
+                <a
+                  href={fallback}
+                  className="block rounded-md border border-[#0e2a63] py-3 text-center text-sm font-bold text-[#0e2a63] hover:bg-blue-50"
+                >
+                  메일 앱으로 보내기
+                </a>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => copyText(COMPANY.email, "email")}
+                    className="rounded-md border py-2.5 text-xs font-bold hover:bg-neutral-100"
+                  >
+                    {copied === "email" ? "복사됨 ✓" : "이메일 주소 복사"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => copyText(fallbackBody, "body")}
+                    className="rounded-md border py-2.5 text-xs font-bold hover:bg-neutral-100"
+                  >
+                    {copied === "body" ? "복사됨 ✓" : "문의 내용 복사"}
+                  </button>
+                </div>
+                <p className="text-xs leading-5 text-neutral-500">
+                  메일 앱이 없으면 이메일 주소와 문의 내용을 복사해 네이버·지메일 등에서 {COMPANY.email}로 보내주세요.
+                </p>
+              </div>
             )}
           </form>
         </div>
