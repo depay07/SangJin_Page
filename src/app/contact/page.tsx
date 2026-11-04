@@ -10,6 +10,7 @@ export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
   const [sending, setSending] = useState(false);
+  const [fallback, setFallback] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,14 +33,20 @@ export default function ContactPage() {
       const result = await response.json();
       if (result.success !== true && result.success !== "true") throw new Error("not accepted");
       form.reset();
+      setFallback("");
       setStatus({
         kind: "done",
         text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
       });
     } catch {
+      const data = new FormData(form);
+      const body = `이름: ${data.get("이름")}\n연락처: ${data.get("연락처")}\n관심분야: ${data.get("관심분야")}\n\n${data.get("문의내용")}`;
+      setFallback(
+        `mailto:${COMPANY.email}?subject=${encodeURIComponent("지엠상진 홈페이지 문의")}&body=${encodeURIComponent(body)}`
+      );
       setStatus({
         kind: "error",
-        text: `전송을 확인하지 못했습니다. 잠시 후 다시 시도하거나 ${COMPANY.email} 또는 ${COMPANY.mobile}로 문의해주세요.`,
+        text: `전송 서버가 응답하지 않습니다. 아래 버튼으로 메일 앱에서 바로 보내주세요. 또는 ${COMPANY.mobile}로 문의해주세요.`,
       });
     } finally {
       window.clearTimeout(timer);
@@ -113,6 +120,14 @@ export default function ContactPage() {
             </button>
             {status.text && (
               <p className={`mt-3 text-sm leading-6 ${statusColor}`}>{status.text}</p>
+            )}
+            {status.kind === "error" && fallback && (
+              <a
+                href={fallback}
+                className="mt-3 block rounded-md border border-[#0e2a63] py-3 text-center text-sm font-bold text-[#0e2a63] hover:bg-blue-50"
+              >
+                메일 앱으로 보내기
+              </a>
             )}
           </form>
         </div>
