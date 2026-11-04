@@ -14,8 +14,7 @@ export default function ContactPage() {
   const [fallbackBody, setFallbackBody] = useState("");
   const [copied, setCopied] = useState("");
 
-  async function copyText(text: string, which: string) {
-    try {
+  async function copyText(text: string, which: string) {    try {
       await navigator.clipboard.writeText(text);
     } catch {
       const ta = document.createElement("textarea");
@@ -103,6 +102,16 @@ export default function ContactPage() {
     }
   }
 
+  function sendSms() {
+    const form = formRef.current;
+    if (!form) return;
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const body =
+      `[지엠상진 홈페이지 문의] 이름: ${data.get("이름")} / 연락처: ${data.get("연락처")} / 관심분야: ${data.get("관심분야")} / 내용: ${data.get("문의내용")}`;
+    window.location.href = `sms:${COMPANY.mobile.replace(/-/g, "")}?body=${encodeURIComponent(body)}`;
+  }
+
   const statusColor =
     status.kind === "done"
       ? "text-green-700"
@@ -164,9 +173,21 @@ export default function ContactPage() {
               </select>
             </label>
             <label className="mt-3 block text-sm font-bold">문의 내용<textarea name="문의내용" rows={5} className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="설비 종류, 물량, 희망 일정 등을 적어 주세요." /></label>
-            <button type="submit" disabled={sending} className="mt-4 w-full rounded-md bg-[#0e2a63] py-3 text-sm font-bold text-white disabled:opacity-60">
-              {sending ? "전송 중..." : "보내기"}
-            </button>
+            <div className="grid grid-cols-2 gap-2">
+              <button type="submit" disabled={sending} className="rounded-md bg-[#0e2a63] py-3 text-sm font-bold text-white disabled:opacity-60">
+                {sending ? "전송 중..." : "보내기"}
+              </button>
+              <button
+                type="button"
+                onClick={sendSms}
+                className="rounded-md bg-[#FEE500] py-3 text-sm font-bold text-[#3C1E1E] hover:brightness-95"
+              >
+                문자로 보내기
+              </button>
+            </div>
+            <p className="mt-2 text-xs leading-5 text-neutral-500">
+              문자로 보내기를 누르면 작성 내용이 담긴 문자 앱이 열려 대표전화({COMPANY.mobile})로 전송됩니다.
+            </p>
             {status.text && (
               <p className={`mt-3 text-sm leading-6 ${statusColor}`}>{status.text}</p>
             )}
