@@ -186,8 +186,19 @@ export default function ContactPage() {
               </button>
             </div>
             <p className="mt-2 text-xs leading-5 text-neutral-500">
-              문자로 보내기를 누르면 작성 내용이 담긴 문자 앱이 열려 대표전화({COMPANY.mobile})로 전송됩니다.
+              문자로 보내기를 누르면 작성 내용이 담긴 문자 앱이 열려 대표전화({COMPANY.mobile})로 전송됩니다. (휴대폰 전용)
             </p>
+            <div className="flex items-center gap-2 rounded-md bg-neutral-50 px-3 py-2.5 text-xs">
+              <span className="font-bold">PC에서는:</span>
+              <span>{COMPANY.mobile}로 직접 문자 보내주세요.</span>
+              <button
+                type="button"
+                onClick={() => copyText(COMPANY.mobile, "sms")}
+                className="ml-auto shrink-0 rounded border bg-white px-2.5 py-1 font-bold hover:bg-neutral-100"
+              >
+                {copied === "sms" ? "복사됨 ✓" : "번호 복사"}
+              </button>
+            </div>
             {status.text && (
               <p className={`mt-3 text-sm leading-6 ${statusColor}`}>{status.text}</p>
             )}
