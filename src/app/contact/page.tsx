@@ -10,6 +10,37 @@ type Status = { kind: "idle" | "sending" | "done" | "error"; text: string };
 // 비어 있으면 FormSubmit으로 전송 시도
 const WEB3FORMS_KEY = "";
 
+// ERP 홈페이지 문의함 백업 (ASPEC-ERP website_inquiries)
+const ERP_INQUIRY_URL =
+  "https://gqttpmdpqotrkbdbstuu.supabase.co/functions/v1/website-inquiry";
+
+async function saveToErp(target: HTMLFormElement) {
+  try {
+    const data = new FormData(target);
+    const name = String(data.get("이름") ?? "");
+    const phone = String(data.get("연락처") ?? "");
+    const interest = String(data.get("관심분야") ?? "");
+    const msg = String(data.get("문의내용") ?? "");
+    const message = `[${interest}] ${name}(${phone}) ${msg}`.trim();
+    if (message.length < 10) return;
+    await fetch(ERP_INQUIRY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        request_id: crypto.randomUUID(),
+        inquiry_type: interest || "지엠상진 홈페이지 문의",
+        message,
+        contact: `${name} ${phone}`.trim(),
+        source_page: window.location.href,
+        source: "sangjin",
+        website: "",
+      }),
+    });
+  } catch {
+    // 백업 실패는 메일 흐름에 영향 없음
+  }
+}
+
 export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
@@ -42,6 +73,7 @@ export default function ContactPage() {
 
     setSending(true);
     setStatus({ kind: "sending", text: "문의 내용을 전송하고 있습니다." });
+    void saveToErp(form);
 
     async function trySend(target: HTMLFormElement): Promise<{ ok: boolean; needsActivation: boolean }> {
       // 1차: Web3Forms (키가 있을 때만)
