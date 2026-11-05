@@ -6,22 +6,26 @@ import { COMPANY } from "@/components/sites/gmsangjin/data";
 
 type Status = { kind: "idle" | "sending" | "done" | "error"; text: string };
 
-// Web3Forms access key (web3forms.com에서 gm-sangjin@naver.com으로 발급받아 입력)
-// 비어 있으면 FormSubmit으로 전송 시도
-const WEB3FORMS_KEY = "";
-
-// ERP 홈페이지 문의함 백업 (ASPEC-ERP website_inquiries)
 const ERP_INQUIRY_URL =
   "https://gqttpmdpqotrkbdbstuu.supabase.co/functions/v1/website-inquiry";
 
-async function saveToErp(target: HTMLFormElement): Promise<boolean> {
+const SUBMIT_ATTEMPTS = 3;
+
+async function saveToErp(target: HTMLFormElement, requestId: string): Promise<boolean> {
   try {
     const data = new FormData(target);
     const name = String(data.get("이름") ?? "");
     const phone = String(data.get("연락처") ?? "");
     const interest = String(data.get("관심분야") ?? "");
     const msg = String(data.get("문의내용") ?? "");
-    const message = `[${interest}] ${name}(${phone}) ${msg}`.trim();
+    const message = [
+      `이름: ${name}`,
+      `연락처: ${phone}`,
+      `관심 분야: ${interest}`,
+      "",
+      "[문의 내용]",
+      msg || "문의 내용 미입력",
+    ].join("\n");
     if (message.length < 10) return false;
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), 15000);
@@ -30,13 +34,13 @@ async function saveToErp(target: HTMLFormElement): Promise<boolean> {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          request_id: crypto.randomUUID(),
-          inquiry_type: interest || "지엠상진 홈페이지 문의",
+          request_id: requestId,
+          inquiry_type: `SANGJIN - ${interest || "홈페이지 문의"}`,
           message,
           contact: `${name} ${phone}`.trim(),
           source_page: window.location.href,
           source: "sangjin",
-          website: "",
+          website: String(data.get("website") ?? ""),
         }),
         signal: controller.signal,
       });
@@ -55,144 +59,36 @@ export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
   const [sending, setSending] = useState(false);
-  const [fallback, setFallback] = useState("");
-  const [fallbackBody, setFallbackBody] = useState("");
-  const [copied, setCopied] = useState("");
-
-  async function copyText(text: string, which: string) {    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-    }
-    setCopied(which);
-    window.setTimeout(() => setCopied(""), 2000);
-  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = formRef.current;
     if (!form || sending) return;
     if (!form.reportValidity()) return;
-    const honey = (form.elements.namedItem("_honey") as HTMLInputElement)?.value;
+    const honey = (form.elements.namedItem("website") as HTMLInputElement)?.value;
     if (honey) return;
 
     setSending(true);
     setStatus({ kind: "sending", text: "문의 내용을 전송하고 있습니다." });
-    const snapshot = new FormData(form);
-
-    async function trySend(data: FormData): Promise<{ ok: boolean; needsActivation: boolean }> {
-      // 1차: Web3Forms (키가 있을 때만)
-      if (WEB3FORMS_KEY) {
-        const controller = new AbortController();
-        const timer = window.setTimeout(() => controller.abort(), 20000);
-        try {
-          const response = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", Accept: "application/json" },
-            body: JSON.stringify({
-              access_key: WEB3FORMS_KEY,
-              subject: "지엠상진 홈페이지 문의",
-              from_name: String(data.get("이름") ?? ""),
-              이름: String(data.get("이름") ?? ""),
-              연락처: String(data.get("연락처") ?? ""),
-              관심분야: String(data.get("관심분야") ?? ""),
-              문의내용: String(data.get("문의내용") ?? ""),
-            }),
-            signal: controller.signal,
-          });
-          const result = await response.json().catch(() => null);
-          if (response.ok && result?.success === true) {
-            return { ok: true, needsActivation: false };
-          }
-        } catch {
-          // 아래 FormSubmit으로 계속
-        } finally {
-          window.clearTimeout(timer);
-        }
-      }
-      // 2차: FormSubmit
-      const controller = new AbortController();
-      const timer = window.setTimeout(() => controller.abort(), 20000);
-      try {
-        const response = await fetch(
-          `https://formsubmit.co/ajax/${COMPANY.email}`,
-          { method: "POST", headers: { Accept: "application/json" }, body: data, signal: controller.signal }
-        );
-        if (!response.ok) return { ok: false, needsActivation: false };
-        const result = await response.json().catch(() => null);
-        if (result?.success === true || result?.success === "true") {
-          return { ok: true, needsActivation: false };
-        }
-        const msg = String(result?.message ?? "");
-        return { ok: false, needsActivation: /activat/i.test(msg) };
-      } catch {
-        return { ok: false, needsActivation: false };
-      } finally {
-        window.clearTimeout(timer);
-      }
-    }
-
-    // ERP 저장이 접수 완료 기준. 메일은 백그라운드로 처리한다.
-    const erpOk = await saveToErp(form);
-    if (erpOk) {
-      form.reset();
-      setFallback("");
-      setFallbackBody("");
-      setSending(false);
-      setStatus({
-        kind: "done",
-        text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
-      });
-      void (async () => {
-        try {
-          await trySend(snapshot);
-        } catch {
-          // 메일 실패는 접수에 영향 없음
-        }
-      })();
-      return;
-    }
-
+    const requestId = crypto.randomUUID();
     try {
-      // ERP 실패 시 기존 메일 흐름 (1회 재시도)
-      let r = await trySend(snapshot);
-      if (!r.ok && !r.needsActivation) {
-        setStatus({ kind: "sending", text: "다시 전송하고 있습니다." });
-        r = await trySend(snapshot);
+      for (let attempt = 1; attempt <= SUBMIT_ATTEMPTS; attempt += 1) {
+        if (await saveToErp(form, requestId)) {
+          form.reset();
+          setStatus({
+            kind: "done",
+            text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
+          });
+          return;
+        }
+        if (attempt < SUBMIT_ATTEMPTS) {
+          setStatus({ kind: "sending", text: "접수 상태를 확인하고 있습니다." });
+          await new Promise(resolve => window.setTimeout(resolve, attempt * 1000));
+        }
       }
-      if (r.ok) {
-        form.reset();
-        setFallback("");
-        setStatus({
-          kind: "done",
-          text: "문의가 접수되었습니다. 남겨주신 연락처로 확인 후 답변드리겠습니다.",
-        });
-        return;
-      }
-      if (r.needsActivation) {
-        throw new Error(
-          `수신 메일함(${COMPANY.email}) 승인 절차가 남아 있습니다. 메일함(스팸함 포함)의 승인 메일을 클릭한 뒤 다시 보내주세요. 급하시면 아래 버튼을 이용해주세요.`
-        );
-      }
-      throw new Error("send failed");
-    } catch (err) {
-      const data = new FormData(form);
-      const body = `이름: ${data.get("이름")}\n연락처: ${data.get("연락처")}\n관심분야: ${data.get("관심분야")}\n\n${data.get("문의내용")}`;
-      setFallbackBody(body);
-      setFallback(
-        `mailto:${COMPANY.email}?subject=${encodeURIComponent("지엠상진 홈페이지 문의")}&body=${encodeURIComponent(body)}`
-      );
       setStatus({
         kind: "error",
-        text:
-          err instanceof Error && err.message !== "send failed"
-            ? err.message
-            : `전송 서버가 응답하지 않습니다. 아래 버튼으로 메일 앱에서 바로 보내주세요. 또는 ${COMPANY.mobile}로 문의해주세요.`,
+        text: `접수 서버 연결이 원활하지 않습니다. 입력 내용은 그대로 유지됩니다. 잠시 후 보내기 버튼을 다시 눌러주세요.`,
       });
     } finally {
       setSending(false);
@@ -246,9 +142,7 @@ export default function ContactPage() {
           </div>
           <form ref={formRef} onSubmit={onSubmit} className="rounded-2xl border p-6">
             <h2 className="text-xl font-extrabold">문의하기</h2>
-            <input type="hidden" name="_subject" value="지엠상진 홈페이지 문의" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+            <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
             <label className="mt-4 block text-sm font-bold">이름 *<input name="이름" required className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="성함" /></label>
             <label className="mt-3 block text-sm font-bold">연락처 *<input name="연락처" required className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="010-0000-0000" /></label>
             <label className="mt-3 block text-sm font-bold">관심 분야
@@ -265,35 +159,6 @@ export default function ContactPage() {
             </button>
             {status.text && (
               <p className={`mt-3 text-sm leading-6 ${statusColor}`}>{status.text}</p>
-            )}
-            {status.kind === "error" && fallback && (
-              <div className="mt-3 space-y-2">
-                <a
-                  href={fallback}
-                  className="block rounded-md border border-[#0e2a63] py-3 text-center text-sm font-bold text-[#0e2a63] hover:bg-blue-50"
-                >
-                  메일 앱으로 보내기
-                </a>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => copyText(COMPANY.email, "email")}
-                    className="rounded-md border py-2.5 text-xs font-bold hover:bg-neutral-100"
-                  >
-                    {copied === "email" ? "복사됨 ✓" : "이메일 주소 복사"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => copyText(fallbackBody, "body")}
-                    className="rounded-md border py-2.5 text-xs font-bold hover:bg-neutral-100"
-                  >
-                    {copied === "body" ? "복사됨 ✓" : "문의 내용 복사"}
-                  </button>
-                </div>
-                <p className="text-xs leading-5 text-neutral-500">
-                  메일 앱이 없으면 이메일 주소와 문의 내용을 복사해 네이버·지메일 등에서 {COMPANY.email}로 보내주세요.
-                </p>
-              </div>
             )}
           </form>
         </div>
