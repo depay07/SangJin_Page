@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { pageSeo } from "@/lib/seo";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 import { PAINT_EQUIPMENT, BUSINESS_TREE } from "@/components/sites/gmsangjin/data";
 
-export const metadata: Metadata = {
-  title: "도장설비 | 전처리·도장부스·건조로·전기제어 턴키 (PLC·HMI)",
-  description:
-    "도장설비 전문: 전처리·전착·도장부스(액체·분체)·건조로·급배기 설비의 전기제어시스템(PLC·HMI·전기판넬제작·전기공사) 턴키 시공. 지엠상진.",
-};
+export const metadata = pageSeo({
+  "path": "/business",
+  "title": "도장설비·도장부스·분체도장·전착·건조로",
+  "description": "도장설비 전처리·전착·액체/분체 도장부스·도장건조로·급기·배기 시스템과 PLC·HMI 전기제어 통합 시공 내용을 확인하세요."
+});
 
 export default function BusinessPage() {
   return (
