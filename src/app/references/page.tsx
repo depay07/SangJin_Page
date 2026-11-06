@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { pageSeo } from "@/lib/seo";
 import { PageHero, SectionTitle } from "@/components/sites/gmsangjin/shared";
 import { REFERENCES } from "@/components/sites/gmsangjin/data";
 
-export const metadata: Metadata = {
-  title: "시공실적 | TOYOTA·BMW·GM·TATA 도장·전기공사 42건",
-  description:
-    "전기공사·도장설비·자동제어 시공실적 42건. TOYOTA·BMW·GM·TATA·LG전자 라인을 중국·폴란드·일본·베트남·미국·인도·브라질에 시공한 지엠상진.",
-};
+export const metadata = pageSeo({
+  "path": "/references",
+  "title": "도장설비·다크로·자동제어 시공실적",
+  "description": "지엠상진의 도장라인, 다크로 코팅라인, 전기제어 및 공장자동화 설비 시공실적. 국내와 중국·폴란드·일본·인도·브라질 등 프로젝트."
+});
 
 const total = REFERENCES.reduce((n, g) => n + g.rows.length, 0);
 

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { pageSeo } from "@/lib/seo";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, COMPANY_NAV } from "@/components/sites/gmsangjin/shared";
 import { COMPANY, GREETING } from "@/components/sites/gmsangjin/data";
 
-export const metadata: Metadata = {
-  title: "인사말 | 자동제어·도장설비 신뢰와 기술의 지엠상진",
-  description:
-    "2015년 창사 이래 자동제어·전기제어·도장설비 길을 걸어온 지엠상진 인사말. 신속한 A/S와 PLC·전기판넬·전기공사 기술력으로 보답합니다.",
-};
+export const metadata = pageSeo({
+  "path": "/greeting",
+  "title": "회사 인사말·자동제어와 도장설비",
+  "description": "지엠상진 인사말. 자동제어·전기제어·도장설비에 관한 기업 소개와 현장 시공 및 고객지원 방향을 안내합니다."
+});
 
 export default function GreetingPage() {
   return (

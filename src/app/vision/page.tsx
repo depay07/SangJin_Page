@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { pageSeo } from "@/lib/seo";
 import { PageHero, SubNav, SectionTitle, COMPANY_NAV } from "@/components/sites/gmsangjin/shared";
 import { VISION_KEYWORDS, VISION_GOALS } from "@/components/sites/gmsangjin/data";
 
-export const metadata: Metadata = {
-  title: "경영비전 | 신뢰성·인력양성·기술혁신",
-  description:
-    "지엠상진 경영비전: 신뢰성 확보·인력 양성·기술 혁신. 글로벌 네트워크, 신기술 개발, 고객관리 네트워킹으로 전기제어·자동제어 시장을 선도합니다.",
-};
+export const metadata = pageSeo({
+  "path": "/vision",
+  "title": "경영비전·기술개발 목표",
+  "description": "지엠상진 경영비전. 신뢰성 확보, 인력 양성, 기술 혁신을 중심으로 도장설비·PLC 자동제어·공장자동화 사업을 전개합니다."
+});
 
 export default function VisionPage() {
   return (
