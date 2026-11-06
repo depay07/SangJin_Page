@@ -37,6 +37,7 @@ export const metadata: Metadata = {
     "지엠상진",
   ],
   robots: { index: true, follow: true },
+  alternates: { canonical: "https://sangjin-fa.com" },
   openGraph: {
     type: "website",
     locale: "ko_KR",
@@ -63,6 +64,9 @@ function JsonLd() {
     telephone: `+82-10-8228-4252`,
     email: COMPANY.email,
     foundingDate: "2015-12",
+    "@id": `${SITE_URL}/#organization`,
+    url: SITE_URL,
+    logo: `${SITE_URL}/sites/gmsangjin/slides/logo-small.png`,
   };
   return (
     <script
