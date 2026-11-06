@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { pageSeo } from "@/lib/seo";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, COMPANY_NAV } from "@/components/sites/gmsangjin/shared";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
 
-export const metadata: Metadata = {
-  title: "회사현황 | 전기제어·제조 전문기업 지엠상진 (시흥, 2015년 설립)",
-  description:
-    "전기제어·제어시스템 제조 전문 지엠상진 회사현황. 대표 조성호, 2015년 설립, 경기도 시흥시 정왕동 본사. PLC·전기판넬제작·전기공사·도장설비.",
-};
+export const metadata = pageSeo({
+  "path": "/about",
+  "title": "회사현황·사업소개",
+  "description": "경기도 시흥시 소재 지엠상진의 회사현황. 2015년 설립, 도장설비·DACRO 표면처리·PLC 자동제어 사업과 본사 및 공장 정보를 안내합니다."
+});
 
 export default function AboutPage() {
   return (
