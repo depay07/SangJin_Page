@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
+import { pageSeo } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
 import { COMPANY_NAV, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 
-export const metadata: Metadata = {
-  title: "전기제어·전기제어시스템·PLC·전기판넬제작·전기공사 전문",
-  description:
-    "전기제어시스템 설계부터 PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사까지. 도장설비·DACRO·공장자동화 턴키 시공 지엠상진. 대표전화 010-8228-4252.",
-};
+export const metadata = pageSeo({
+  path: "/",
+  title: "도장설비·DACRO·PLC 자동제어·전기판넬 제작",
+  description: "시흥 지엠상진. 도장설비·DACRO 다크로 표면처리 설비·PLC 자동제어·HMI·전기판넬 제작 및 전기공사와 시운전까지 종합 시공.",
+  keywords: ["도장설비","다크로","DACRO","전기판넬 제작","PLC 자동제어","공장자동화"],
+});
 
 const PILLARS = [
   {
@@ -24,10 +25,10 @@ const PILLARS = [
     href: "/business",
   },
   {
-    title: "자동제어",
-    en: "판넬 · HMI",
+    title: "PLC 자동제어",
+    en: "전기판넬 · HMI",
     img: "/sites/gmsangjin/slides/panel-2.jpg",
-    href: "/business",
+    href: "/automation",
   },
 ];
 
@@ -113,7 +114,7 @@ export default function Home() {
         <p className="mt-3 max-w-4xl text-sm leading-7 text-neutral-600">
           지엠상진은 전기제어 전문 기업으로, 제어시스템 기본·상세 설계, PLC
           제어프로그램 작성, 전기판넬제작(HMI·계장제작 포함), 현장 전기공사와
-          시운전을 일괄 수행합니다. 도장설비(전처리·전착·도장부스·건조로·급배기),
+          시운전을 일괄 수행합니다. <Link href="/automation" className="font-bold text-blue-800 underline">PLC 자동제어·전기판넬 제작 서비스</Link>에서 자세한 작업 범위를 확인할 수 있습니다. 도장설비(전처리·전착·도장부스·건조로·급배기),
           DACRO 표면처리(SPIN·DIP·TILTI 코터), 공장자동화(FA) 라인까지
           기계·전기 통합 턴키로 맡기실 수 있습니다. 자동차 부품·전자제품
           도장라인을 국내는 물론 중국·폴란드·일본·베트남·미국·인도·브라질에
