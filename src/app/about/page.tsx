@@ -18,7 +18,7 @@ export default function AboutPage() {
         <SectionTitle kicker="Company" title="회사 현황표" />
         <div className="mt-6 overflow-hidden rounded-2xl border bg-white text-sm">
           <div className="grid grid-cols-[130px_1fr] border-b sm:grid-cols-[180px_1fr]">
-            <dt className="bg-[#6d5b9e] px-4 py-3 font-bold text-white">회사명</dt>
+            <dt className="bg-[var(--legacy-3)] px-4 py-3 font-bold text-white">회사명</dt>
             <dd className="px-4 py-3 font-bold">
               {COMPANY.name} <span className="font-normal text-neutral-500">{COMPANY.en}</span>
             </dd>

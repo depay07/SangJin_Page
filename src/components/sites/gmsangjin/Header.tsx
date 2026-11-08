@@ -35,7 +35,7 @@ function DesktopDropdown({
       </button>
       {open && (
         <div className="absolute left-0 top-full pt-2">
-          <div className="w-44 overflow-hidden rounded-lg border border-white/10 bg-[#142f66] shadow-xl">
+          <div className="w-44 overflow-hidden rounded-lg border border-white/10 bg-[var(--legacy-4)]">
           {items.map((n) => (
             <Link
               key={n.href}
@@ -95,7 +95,7 @@ function Menus() {
             메뉴
           </button>
           {mobile && (
-            <div className="absolute right-0 mt-2 max-h-[70vh] w-48 overflow-y-auto rounded-lg border border-white/10 bg-[#142f66] shadow-xl">
+            <div className="absolute right-0 mt-2 max-h-[70vh] w-48 overflow-y-auto rounded-lg border border-white/10 bg-[var(--legacy-4)]">
               <Link href="/" className="block px-4 py-3 text-sm font-bold hover:bg-white/10">
                 홈
               </Link>
@@ -129,7 +129,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0e2a63]/95 text-white backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--legacy-2)]/95 text-white backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5">
           <Image
@@ -143,7 +143,7 @@ export function SiteHeader() {
             <span className="block text-lg font-extrabold tracking-tight">
               지엠상진
             </span>
-            <span className="block text-[10px] font-medium tracking-wider text-neutral-300">
+            <span className="block text-[10px] font-medium  text-neutral-300">
               GM SANGJIN ENGINEERING & ELECTRIC
             </span>
           </span>

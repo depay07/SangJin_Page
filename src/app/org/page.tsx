@@ -16,14 +16,14 @@ export default function OrgPage() {
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <SectionTitle kicker="Organization" title="회사 조직도" />
         <div className="mt-6 text-center">
-          <p className="mx-auto inline-block rounded-md border-2 border-red-700 bg-violet-100 px-10 py-3 text-lg font-extrabold text-[#0e2a63]">
+          <p className="mx-auto inline-block rounded-md border-2 border-red-700 bg-violet-100 px-10 py-3 text-lg font-extrabold text-[var(--legacy-2)]">
             대표 이사
           </p>
         </div>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {ORG.map((o) => (
             <div key={o.dept} className="rounded-2xl border bg-white p-5">
-              <p className="rounded-md bg-violet-100 px-4 py-2.5 text-center font-extrabold text-[#0e2a63]">
+              <p className="rounded-md bg-violet-100 px-4 py-2.5 text-center font-extrabold text-[var(--legacy-2)]">
                 {o.dept}
               </p>
               <ul className="mt-3 space-y-2">

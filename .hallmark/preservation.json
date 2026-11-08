@@ -1,0 +1,18 @@
+{
+  "baseline": "4d255bd7cfe417a8cefa413c7d618e14246b5ef6",
+  "result": "PASS: only className attributes differ in every modified TSX file",
+  "files": [
+    "src/app/about/page.tsx",
+    "src/app/automation/page.tsx",
+    "src/app/business/page.tsx",
+    "src/app/contact/page.tsx",
+    "src/app/dacro/page.tsx",
+    "src/app/org/page.tsx",
+    "src/app/page.tsx",
+    "src/app/references/page.tsx",
+    "src/app/vision/page.tsx",
+    "src/components/sites/gmsangjin/Footer.tsx",
+    "src/components/sites/gmsangjin/Header.tsx",
+    "src/components/sites/gmsangjin/shared.tsx"
+  ]
+}

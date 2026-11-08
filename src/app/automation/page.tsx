@@ -47,7 +47,7 @@ export default function AutomationPage() {
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-blue-700">Industrial Automation</p>
+            <p className="text-sm font-bold   text-blue-700">Industrial Automation</p>
             <h2 className="mt-2 text-2xl font-extrabold sm:text-3xl">PLC 프로그램부터 제어반 제작·현장 시운전까지</h2>
             <p className="mt-5 text-sm leading-8 text-neutral-700">
               {COMPANY.name}은 자동제어 설계, PLC 제어프로그램 작성, 전기판넬 제작, HMI 화면 구성 및 현장 전기공사를 수행합니다.
@@ -78,7 +78,7 @@ export default function AutomationPage() {
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {services.map(([title, desc]) => (
               <article key={title} className="rounded-2xl border bg-white p-6">
-                <h3 className="text-lg font-extrabold text-[#0e2a63]">{title}</h3>
+                <h3 className="text-lg font-extrabold text-[var(--legacy-2)]">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-neutral-700">{desc}</p>
               </article>
             ))}
@@ -123,10 +123,10 @@ export default function AutomationPage() {
               <p className="mt-3 text-sm leading-7">DACRO 코터, 도장설비, 컨베이어 등 회사에서 취급하는 설비의 자동제어 및 연동을 검토합니다.</p>
             </details>
           </div>
-          <div className="mt-8 rounded-2xl bg-[#0e2a63] p-8 text-white">
+          <div className="mt-8 rounded-2xl bg-[var(--legacy-2)] p-8 text-white">
             <h2 className="text-xl font-extrabold">전기제어·판넬 제작 견적문의</h2>
             <p className="mt-3 text-sm leading-7 text-blue-100">설비 사양, PLC 기종, 시공 범위와 희망 일정을 알려주세요. 대표전화 {COMPANY.mobile}</p>
-            <Link href="/contact" className="mt-5 inline-block rounded-md bg-white px-5 py-3 text-sm font-bold text-[#0e2a63]">상담 및 견적 문의</Link>
+            <Link href="/contact" className="mt-5 inline-block rounded-md bg-white px-5 py-3 text-sm font-bold text-[var(--legacy-2)]">상담 및 견적 문의</Link>
           </div>
         </div>
       </section>

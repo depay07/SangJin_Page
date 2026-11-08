@@ -40,7 +40,7 @@ export default function DacroPage() {
                 className="aspect-[16/10] w-full object-cover"
               />
               <div className="p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-blue-700">{e.en}</p>
+                <p className="text-xs font-bold   text-blue-700">{e.en}</p>
                 <h3 className="mt-1 text-lg font-extrabold">
                   {e.no}) {e.title}
                 </h3>

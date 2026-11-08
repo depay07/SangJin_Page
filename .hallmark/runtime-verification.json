@@ -1,0 +1,304 @@
+{
+  "result": "PASS",
+  "routes": [
+    {
+      "route": "/",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·DACRO·PLC 자동제어·전기판넬 제작",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·DACRO·PLC 자동제어·전기판넬 제작",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·DACRO·PLC 자동제어·전기판넬 제작",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/about",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사현황·사업소개 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/about",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사현황·사업소개 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/about",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사현황·사업소개 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/automation",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "PLC 자동제어·전기판넬 제작·HMI 설계 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/automation",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "PLC 자동제어·전기판넬 제작·HMI 설계 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/automation",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "PLC 자동제어·전기판넬 제작·HMI 설계 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/business",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·도장부스·분체도장·전착·건조로 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/business",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·도장부스·분체도장·전착·건조로 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/business",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·도장부스·분체도장·전착·건조로 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/contact",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·PLC 자동제어 견적문의 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/contact",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·PLC 자동제어 견적문의 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/contact",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·PLC 자동제어 견적문의 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/dacro",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "DACRO 다크로·지오메트 코팅 설비 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/dacro",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "DACRO 다크로·지오메트 코팅 설비 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/dacro",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "DACRO 다크로·지오메트 코팅 설비 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/factory",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "공장 및 장비·시흥 전기판넬 제작 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/factory",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "공장 및 장비·시흥 전기판넬 제작 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/factory",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "공장 및 장비·시흥 전기판넬 제작 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/greeting",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사 인사말·자동제어와 도장설비 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/greeting",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사 인사말·자동제어와 도장설비 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/greeting",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사 인사말·자동제어와 도장설비 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/org",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사 조직도·자동제어 사업부 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/org",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사 조직도·자동제어 사업부 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/org",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "회사 조직도·자동제어 사업부 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/references",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·다크로·자동제어 시공실적 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/references",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·다크로·자동제어 시공실적 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/references",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "도장설비·다크로·자동제어 시공실적 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/vision",
+      "width": 320,
+      "overflow": false,
+      "broken": 0,
+      "title": "경영비전·기술개발 목표 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/vision",
+      "width": 768,
+      "overflow": false,
+      "broken": 0,
+      "title": "경영비전·기술개발 목표 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    },
+    {
+      "route": "/vision",
+      "width": 1280,
+      "overflow": false,
+      "broken": 0,
+      "title": "경영비전·기술개발 목표 | 지엠상진 전기제어·자동제어 전문",
+      "description": true,
+      "schema": true
+    }
+  ],
+  "contact": "mocked success, three retries with identical request ID, failure preserves input; zero production requests",
+  "mobileMenu": "PASS"
+}

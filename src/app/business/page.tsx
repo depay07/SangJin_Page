@@ -44,7 +44,7 @@ export default function BusinessPage() {
                     </p>
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       {it.children.map((c) => (
-                        <span key={c} className="rounded bg-blue-200/70 px-2.5 py-1 text-xs font-bold text-[#0e2a63]">
+                        <span key={c} className="rounded bg-blue-200/70 px-2.5 py-1 text-xs font-bold text-[var(--legacy-2)]">
                           {c}
                         </span>
                       ))}
@@ -54,7 +54,7 @@ export default function BusinessPage() {
               </ul>
             </div>
           )}
-          <div className="rounded-2xl bg-[#0e2a63] p-6 text-sm leading-7 text-blue-50 sm:p-8">
+          <div className="rounded-2xl bg-[var(--legacy-2)] p-6 text-sm leading-7 text-blue-50 sm:p-8">
             <p className="font-bold text-white">전처리 공정 (금속도장 전 필수 공정)</p>
             <p className="mt-1">탕세 ▶ 탈지 ▶ 수세 ▶ 표면조정 ▶ 화성피막 ▶ 수세 ▶ 수절 — 제품 종류 및 도장 정도에 따라 세부공정 조정 (주문사양).</p>
             <p className="mt-3 font-bold text-white">건조로 분류</p>
@@ -83,7 +83,7 @@ export default function BusinessPage() {
                   className="aspect-[16/10] w-full object-cover"
                 />
                 <div className="p-5">
-                  <p className="text-xs font-bold uppercase tracking-wider text-blue-700">{e.en}</p>
+                  <p className="text-xs font-bold   text-blue-700">{e.en}</p>
                   <h3 className="mt-1 text-lg font-extrabold">
                     {e.no}) {e.title}
                   </h3>

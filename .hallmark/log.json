@@ -1,0 +1,34 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "shape": "Split Studio",
+  "theme": "blueprint",
+  "axes": "light/geometric-sans/neutral",
+  "hero": "Poster",
+  "nav": "masthead",
+  "footer": "letter close",
+  "imagery": "existing equipment photographs",
+  "photos": [],
+  "entry": "src/app/page.tsx",
+  "fingerprint": "photo-poster/portfolio/technical-split/directory/faq/contact",
+  "sections": [
+   "hero",
+   "portfolio",
+   "technical scope",
+   "directory",
+   "faq",
+   "contact"
+  ],
+  "signature": "real coating line at architectural scale",
+  "waived": [
+   "copy 54/63 preserved by explicit user instruction",
+   "inner page banner 44c",
+   "compact technical subnav rhythm59",
+   "contact band77"
+  ],
+  "prompt": "Professional industrial automation engineering redesign, all copy and wiring verbatim",
+  "date": "2026-11-08"
+ }
+]

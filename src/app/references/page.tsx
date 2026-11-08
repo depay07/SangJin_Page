@@ -23,7 +23,7 @@ export default function ReferencesPage() {
         <div className="mt-8 space-y-10">
           {REFERENCES.map((g, gi) => (
             <section key={`${g.category}-${gi}`} className="overflow-hidden rounded-2xl border">
-              <h2 className="border-b-2 border-red-700 bg-blue-50 px-5 py-3 text-base font-extrabold text-[#0e2a63] sm:px-6">
+              <h2 className="border-b-2 border-red-700 bg-blue-50 px-5 py-3 text-base font-extrabold text-[var(--legacy-2)] sm:px-6">
                 {g.category}
               </h2>
               <div className="overflow-x-auto">

@@ -1,0 +1,22 @@
+{
+  "scanned": "2026-11-08",
+  "findings": {
+    "framework": "Next.js 16, package.json",
+    "palette": "navy #0e2a63, shared.tsx",
+    "material": "local equipment photographs"
+  },
+  "preserve": [
+    "all copy",
+    "SEO",
+    "JSON-LD",
+    "forms",
+    "links",
+    "logo",
+    "photographs"
+  ],
+  "introduce": [
+    "whiteprint system",
+    "large photo hero",
+    "responsive typography"
+  ]
+}

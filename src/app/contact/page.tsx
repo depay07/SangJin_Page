@@ -154,7 +154,7 @@ export default function ContactPage() {
               </select>
             </label>
             <label className="mt-3 block text-sm font-bold">문의 내용<textarea name="문의내용" rows={5} className="mt-1 w-full rounded-md border px-3 py-2 font-normal" placeholder="설비 종류, 물량, 희망 일정 등을 적어 주세요." /></label>
-            <button type="submit" disabled={sending} className="mt-4 w-full rounded-md bg-[#0e2a63] py-3 text-sm font-bold text-white disabled:opacity-60">
+            <button type="submit" disabled={sending} className="mt-4 w-full rounded-md bg-[var(--legacy-2)] py-3 text-sm font-bold text-white disabled:opacity-60">
               {sending ? "전송 중..." : "보내기"}
             </button>
             {status.text && (

@@ -16,7 +16,7 @@ export function SiteFooter() {
           />
           <div>
             <p className="text-2xl font-extrabold">{COMPANY.name}</p>
-            <p className="text-[11px] tracking-wider text-neutral-400">
+            <p className="text-[11px]  text-neutral-400">
               {COMPANY.en}
             </p>
           </div>
