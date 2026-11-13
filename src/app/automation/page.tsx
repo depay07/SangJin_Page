@@ -9,7 +9,7 @@ export const metadata = pageSeo({
   title: "PLC 자동제어·전기판넬 제작·HMI 설계",
   description:
     "PLC 제어프로그램, 전기제어시스템 설계, 전기판넬·제어반 제작, HMI 화면 구성, 현장 전기공사 및 시운전. 도장설비·DACRO 자동제어 전문 지엠상진.",
-  keywords: ["PLC 자동제어","PLC 프로그램 개발","전기제어반 제작","전기판넬 제작","HMI 설계","시흥 자동제어 업체","공장자동화 FA","산업설비 전기공사","제어반 개조"],
+  keywords: ["PLC 자동제어", "PLC 프로그램", "전기판넬 제작", "제어반 제작", "전기제어시스템", "HMI", "공장자동화", "시흥 자동제어"],
 });
 
 const services = [
@@ -59,7 +59,7 @@ export default function AutomationPage() {
               {" "}<Link href="/dacro" className="font-bold text-blue-800 underline">DACRO 다크로 코팅라인</Link>, 컨베이어 등
               실제 설비에 필요한 제어반·PLC·HMI를 함께 검토합니다.
             </p>
-            <div className="mt-4 flex flex-wrap items-center gap-6"><Link href="/references" className="inline-block font-bold text-blue-800 underline">관련 시공실적 확인</Link><Link href="/electrical-instrumentation" className="inline-block font-bold text-blue-800 underline">현장 전기·계장공사 안내</Link></div>
+            <Link href="/references" className="mt-4 inline-block font-bold text-blue-800 underline">관련 시공실적 확인</Link>
           </div>
           <Image
             src="/sites/gmsangjin/slides/panel-2.jpg"

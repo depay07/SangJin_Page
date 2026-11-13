@@ -1,4 +1,4 @@
-import { pageSeo, SITE_URL } from "@/lib/seo";
+import { pageSeo } from "@/lib/seo";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 import { PAINT_EQUIPMENT, BUSINESS_TREE } from "@/components/sites/gmsangjin/data";
@@ -6,26 +6,12 @@ import { PAINT_EQUIPMENT, BUSINESS_TREE } from "@/components/sites/gmsangjin/dat
 export const metadata = pageSeo({
   "path": "/business",
   "title": "도장설비·도장부스·분체도장·전착·건조로",
-  "description": "도장설비 전처리·전착·액체/분체 도장부스·도장건조로·급기·배기 시스템과 PLC·HMI 전기제어 통합 시공 내용을 확인하세요.",
-  keywords: ["도장설비","도장라인 설계","도장부스 제작","액체도장 설비","분체도장 설비","전착도장","전처리 설비","도장 건조로","도장 배기설비","도장설비 시공"]
+  "description": "도장설비 전처리·전착·액체/분체 도장부스·도장건조로·급기·배기 시스템과 PLC·HMI 전기제어 통합 시공 내용을 확인하세요."
 });
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": `${SITE_URL}/business/#service`,
-  name: "도장설비·도장부스·전처리·전착·분체도장 설비",
-  serviceType: "산업용 도장라인 설계·시공",
-  description: "전처리·전착·액체 및 분체 도장부스·도장 건조로·급배기 설비·컨베이어와 PLC 자동제어 연계",
-  provider: { "@id": `${SITE_URL}/#organization` },
-  areaServed: { "@type": "Country", name: "대한민국" },
-  url: `${SITE_URL}/business`,
-};
 
 export default function BusinessPage() {
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <PageHero title="도장설비" en="Paint Finishing Plant" />
       <SubNav current="/business" items={BIZ_NAV} />
 

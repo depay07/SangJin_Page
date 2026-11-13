@@ -10,7 +10,6 @@ export const BIZ_NAV = [
   { label: "도장설비", href: "/business" },
   { label: "DACRO 표면처리", href: "/dacro" },
   { label: "PLC 자동제어·판넬", href: "/automation" },
-  { label: "전기·계장공사", href: "/electrical-instrumentation" },
 ];
 
 export const COMPANY = {
@@ -45,11 +44,6 @@ export const PILLARS = [
     title: "자동제어 전문",
     en: "PLC · HMI · PANEL",
     desc: "제어설계·프로그램·계장제작·현장설치, 컨트롤 판넬과 HMI 구성",
-  },
-  {
-    title: "전기·계장공사",
-    en: "ELECTRICAL · INSTRUMENTATION",
-    desc: "산업설비 전기배선, 케이블 포설, 계장기기 설치, 현장 결선 및 I/O·Loop Check와 시운전",
   },
 ];
 
