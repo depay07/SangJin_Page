@@ -6,9 +6,9 @@ import { pageSeo } from "@/lib/seo";
 
 export const metadata = pageSeo({
   path: "/",
-  title: "도장설비·다크로 코팅라인·PLC 자동제어 전문",
-  description: "지엠상진은 도장설비, 다크로(DACRO)·지오메트 코팅라인, PLC 자동제어 및 전기제어반 설계·제작·시공·시운전을 수행하는 시흥 소재 산업설비 전문기업입니다.",
-  keywords: ["지엠상진", "도장설비", "도장라인", "다크로 설비", "DACRO 코팅라인", "지오메트", "PLC 자동제어", "전기제어반 제작", "공장자동화"],
+  title: "도장설비·다크로·PLC 자동제어·전기계장공사",
+  description: "지엠상진은 도장설비, 다크로(DACRO)·지오메트 코팅라인, PLC 자동제어와 전기·계장공사(케이블 포설·계측기 설치·시운전)를 연결하는 산업설비 전문기업입니다.",
+  keywords: ["지엠상진", "도장설비", "도장라인", "다크로 설비", "DACRO 코팅라인", "지오메트", "PLC 자동제어", "전기제어반 제작", "공장자동화", "전기계장공사", "계장설치", "케이블 포설"],
 });
 
 const businesses = [
@@ -42,13 +42,24 @@ const businesses = [
     img: "/sites/gmsangjin/slides/panel-2.jpg",
     alt: "지엠상진 PLC 자동제어 전기판넬 및 산업용 제어반",
   },
+  {
+    number: "04",
+    eyebrow: "ELECTRICAL & INSTRUMENTATION",
+    title: "전기·계장공사",
+    desc: "산업설비 전기공사, 케이블 포설, 계장기기 설치와 현장 결선, I/O 점검 및 Loop Check까지.",
+    tags: ["전기공사 · 케이블", "계장설치", "현장 시운전"],
+    href: "/electrical-instrumentation",
+    img: "/sites/gmsangjin/slides/panel-1.jpg",
+    alt: "산업용 제어반과 전기·계장 시공 연결을 위한 전장 설비 사진",
+  },
 ];
 
 const focus = [
   { name: "전처리 · 전착 라인", copy: "탕세, 탈지, 수세, 화성피막 공정과 전착 도장라인의 설비 구성", href: "/business" },
   { name: "액체 · 분체 도장", copy: "도장부스, 분체 도장 시스템, 건조로와 공조·환경 설비", href: "/business" },
   { name: "다크로 · 지오메트", copy: "SPIN/DIP/TILTI 코터와 코팅라인, 쇼트·세척 및 도료 공급", href: "/dacro" },
-  { name: "PLC · HMI · 제어반", copy: "제어프로그램, 제어반 제작, 전기공사 및 설비 시운전", href: "/automation" },
+  { name: "PLC · HMI · 제어반", copy: "제어프로그램과 HMI, 제어반 설계·제작", href: "/automation" },
+  { name: "전기 · 계장공사", copy: "케이블 포설, 계측기 설치, 현장 결선 및 Loop Check", href: "/electrical-instrumentation" },
 ];
 
 const steps = [
@@ -62,6 +73,7 @@ const faqs = [
   { q: "도장라인을 전처리부터 건조까지 일괄 시공할 수 있나요?", a: "전처리, 전착, 액체·분체 도장부스, 건조로와 급기·배기 설비를 공정 조건에 맞춰 검토합니다. 설비의 PLC 및 HMI 제어 구성도 함께 상담할 수 있습니다." },
   { q: "다크로(DACRO)와 지오메트 코팅설비도 제작하나요?", a: "SPIN, DIP, TILTI 코터와 코팅라인, 세척·쇼트 설비 및 도료 공급장치(P.C.S) 등 표면처리 라인 구성을 다룹니다." },
   { q: "기존 PLC 프로그램 수정과 전기판넬 교체도 가능한가요?", a: "기존 설비의 PLC 프로그램 수정, 자동제어반 교체, HMI 구성과 증설 연동을 현장 조건에 따라 검토합니다. 기종과 설비 현황을 알려주시면 상담에 도움이 됩니다." },
+  { q: "전기·계장공사와 Loop Check도 상담할 수 있나요?", a: "산업설비의 케이블 포설, 계장기기 설치·결선, PLC I/O 확인 및 Loop Check 범위를 현장 조건과 관련 자격 요건에 따라 검토합니다." },
 ];
 
 export default function Home() {
@@ -73,7 +85,7 @@ export default function Home() {
         <div className="sj-wrap sj-hero__content">
           <div className="sj-hero__intro"><span className="sj-overline sj-overline--light"><span className="sj-line" /> GM SANGJIN ENGINEERING</span><span>INDUSTRIAL PLANT & AUTOMATION</span></div>
           <h1 id="sj-hero-heading">도장설비부터<br /><strong>PLC 자동제어까지.</strong><br />생산의 기준을 설계하다.</h1>
-          <p className="sj-hero__description">도장라인 · DACRO 다크로/지오메트 코팅설비 · 전기제어시스템<br className="sj-desktop-only" /> 설계, 제작, 시공과 시운전까지 연결하는 산업설비 엔지니어링.</p>
+          <p className="sj-hero__description">도장라인 · DACRO 다크로/지오메트 코팅설비 · PLC 자동제어 · 전기·계장공사<br className="sj-desktop-only" /> 설계, 제작, 시공과 시운전까지 연결하는 산업설비 엔지니어링.</p>
           <div className="sj-hero__actions">
             <Link href="/business" className="sj-button sj-button--solid">사업분야 살펴보기 <ArrowUpRight size={18} aria-hidden="true" /></Link>
             <Link href="/contact" className="sj-button sj-button--outline">프로젝트 상담 <ArrowUpRight size={18} aria-hidden="true" /></Link>
@@ -90,6 +102,7 @@ export default function Home() {
           <Link href="/business"><span>01 / PAINT</span><strong>도장설비 · 도장라인</strong><ArrowUpRight size={20} aria-hidden="true" /></Link>
           <Link href="/dacro"><span>02 / SURFACE</span><strong>다크로 · 지오메트</strong><ArrowUpRight size={20} aria-hidden="true" /></Link>
           <Link href="/automation"><span>03 / CONTROL</span><strong>PLC · 전기제어반</strong><ArrowUpRight size={20} aria-hidden="true" /></Link>
+          <Link href="/electrical-instrumentation"><span>04 / E&I</span><strong>전기 · 계장공사</strong><ArrowUpRight size={20} aria-hidden="true" /></Link>
         </div>
       </div>
 
@@ -101,7 +114,7 @@ export default function Home() {
           </div>
           <div className="sj-intro__right">
             <p className="sj-intro__lead">산업설비의 안정적인 운영은 정확한 공정 이해와 견고한 제어시스템에서 시작됩니다.</p>
-            <p>{COMPANY.name}은 도장설비, DACRO 표면처리 및 자동제어 분야를 중심으로 기계설비와 전기제어를 연결합니다. 공정 검토에서 설계·제작·현장 설치·시운전에 이르는 과정을 함께 고민합니다.</p>
+            <p>{COMPANY.name}은 도장설비, DACRO 표면처리, PLC 자동제어와 전기·계장공사를 중심으로 기계설비와 현장 제어를 연결합니다. 공정 검토에서 설계·제작·현장 설치·시운전에 이르는 과정을 함께 고민합니다.</p>
             <Link className="sj-text-link" href="/about">회사소개 <ArrowUpRight size={19} aria-hidden="true" /></Link>
           </div>
         </div>
@@ -111,12 +124,12 @@ export default function Home() {
         <div className="sj-wrap">
           <div className="sj-section-heading">
             <div><p className="sj-overline"><span className="sj-line" /> OUR BUSINESS</p><h2 className="sj-section-title">공정에 최적화된<br /><span>산업설비 솔루션</span></h2></div>
-            <p>도장 플랜트부터 표면처리 장비, 자동제어반까지.<br />세 가지 핵심 사업을 유기적으로 연결합니다.</p>
+            <p>도장 플랜트부터 표면처리 장비, 자동제어반까지.<br />네 가지 핵심 사업을 유기적으로 연결합니다.</p>
           </div>
           <div className="sj-business__grid">
             {businesses.map((item) => (
               <Link key={item.number} href={item.href} className="sj-business-card">
-                <div className="sj-business-card__visual"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 800px) 100vw, 33vw" className="sj-business-card__image" /><span className="sj-business-card__num">{item.number}</span><span className="sj-business-card__arrow"><ArrowUpRight size={23} aria-hidden="true" /></span></div>
+                <div className="sj-business-card__visual"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 760px) 100vw, (max-width: 1150px) 50vw, 25vw" className="sj-business-card__image" /><span className="sj-business-card__num">{item.number}</span><span className="sj-business-card__arrow"><ArrowUpRight size={23} aria-hidden="true" /></span></div>
                 <div className="sj-business-card__body"><span className="sj-eyebrow">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.desc}</p><div className="sj-business-card__tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
               </Link>
             ))}
@@ -133,9 +146,9 @@ export default function Home() {
           <ul>
             <li><Factory size={22} aria-hidden="true" /><span>산업용 도장 · 표면처리 설비</span></li>
             <li><CircuitBoard size={22} aria-hidden="true" /><span>PLC · HMI · 제어판넬</span></li>
-            <li><Wrench size={22} aria-hidden="true" /><span>현장 설치 · 시운전 · 유지보수 상담</span></li>
+            <li><Wrench size={22} aria-hidden="true" /><span>전기 · 계장공사 · 현장 시운전</span></li>
           </ul>
-          <Link href="/automation" className="sj-text-link sj-text-link--light">자동제어 기술 확인 <ArrowUpRight size={19} aria-hidden="true" /></Link>
+          <Link href="/electrical-instrumentation" className="sj-text-link sj-text-link--light">전기·계장공사 안내 <ArrowUpRight size={19} aria-hidden="true" /></Link>
         </div>
       </section>
 
