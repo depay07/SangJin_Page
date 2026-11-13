@@ -10,11 +10,11 @@ const SITE_URL = "https://sangjin-fa.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "지엠상진 | 도장설비·다크로 코팅라인·PLC 자동제어",
+    default: "지엠상진 | 도장설비·다크로·PLC 자동제어·전기계장공사",
     template: "%s | 지엠상진",
   },
   description:
-    "지엠상진은 도장설비·도장라인, DACRO(다크로)·지오메트 코팅설비, PLC 자동제어, HMI 및 전기제어반 설계·제작·시공·시운전을 수행하는 시흥 소재 산업설비 전문기업입니다.",
+    "지엠상진은 도장설비·다크로(DACRO) 코팅라인, PLC 자동제어, 전기·계장공사 및 케이블 포설·계측기 설치·시운전을 연계하는 산업설비 전문기업입니다.",
   keywords: [
     "전기제어",
     "전기제어시스템",
@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     "PLC제어",
     "제어프로그램",
     "전기공사",
+    "전기계장공사",
+    "계장설치",
+    "케이블 포설",
     "자동제어",
     "공장자동화",
     "HMI",
@@ -44,9 +47,9 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     siteName: "지엠상진",
     url: SITE_URL,
-    title: "지엠상진 | 도장설비·다크로 코팅라인·PLC 자동제어",
+    title: "지엠상진 | 도장설비·PLC 자동제어·전기계장공사",
     description:
-      "산업용 도장설비, DACRO 지오메트 코팅라인, PLC·HMI 전기제어반 제작 및 시공. GM SANGJIN ENGINEERING & ELECTRIC.",
+      "산업용 도장설비, DACRO 코팅라인, PLC·HMI 전기제어반, 전기·계장공사 및 시운전. GM SANGJIN ENGINEERING & ELECTRIC.",
     images: [{ url: "/sites/gmsangjin/slides/coaterline-1.jpg", width: 1200, height: 630, alt: "지엠상진 산업용 코팅설비" }],
   },
   twitter: { card: "summary_large_image", images: ["/sites/gmsangjin/slides/coaterline-1.jpg"] },
@@ -68,7 +71,7 @@ function JsonLd() {
     telephone: `+82-10-8228-4252`,
     email: COMPANY.email,
     foundingDate: "2015-12",
-    knowsAbout: ["산업용 도장설비", "액체도장·분체도장", "전처리·전착", "DACRO 다크로 코팅라인", "지오메트 코팅", "PLC 자동제어", "HMI", "전기제어반 제작"],
+    knowsAbout: ["산업용 도장설비", "액체도장·분체도장", "전처리·전착", "DACRO 다크로 코팅라인", "지오메트 코팅", "PLC 자동제어", "HMI", "전기제어반 제작", "전기·계장공사", "계측기 설치"],
     "@id": `${SITE_URL}/#organization`,
     url: SITE_URL,
     contactPoint: [{ "@type": "ContactPoint", telephone: COMPANY.tel, contactType: "sales", areaServed: "KR", availableLanguage: ["ko"] }],
