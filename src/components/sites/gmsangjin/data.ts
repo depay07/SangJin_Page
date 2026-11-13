@@ -10,6 +10,7 @@ export const BIZ_NAV = [
   { label: "도장설비", href: "/business" },
   { label: "DACRO 표면처리", href: "/dacro" },
   { label: "PLC 자동제어·판넬", href: "/automation" },
+  { label: "전기·계장공사", href: "/electrical-instrumentation" },
 ];
 
 export const COMPANY = {
