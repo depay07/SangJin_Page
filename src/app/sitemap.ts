@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/business",
     "/dacro",
     "/automation",
+    "/electrical-instrumentation",
     "/references",
     "/contact",
   ];

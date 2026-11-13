@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./corporate.css";
 import { SiteHeader } from "@/components/sites/gmsangjin/Header";
 import { SiteFooter } from "@/components/sites/gmsangjin/Footer";
 import { COMPANY } from "@/components/sites/gmsangjin/data";
@@ -9,11 +10,11 @@ const SITE_URL = "https://sangjin-fa.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "지엠상진 | 전기제어·도장설비·공장자동화 전문 (PLC, 전기판넬제작, 전기공사)",
-    template: "%s | 지엠상진 전기제어·자동제어 전문",
+    default: "지엠상진 | 도장설비·다크로·PLC 자동제어·전기계장공사",
+    template: "%s | 지엠상진",
   },
   description:
-    "전기제어시스템 설계·제작·시공 전문 지엠상진. PLC 제어프로그램, 전기판넬제작(HMI·계장), 전기공사, DACRO·도장설비(액체·분체·전착·전처리) 턴키 시공. 대표전화 010-8228-4252.",
+    "지엠상진은 도장설비·다크로(DACRO) 코팅라인, PLC 자동제어, 전기·계장공사 및 케이블 포설·계측기 설치·시운전을 연계하는 산업설비 전문기업입니다.",
   keywords: [
     "전기제어",
     "전기제어시스템",
@@ -23,6 +24,9 @@ export const metadata: Metadata = {
     "PLC제어",
     "제어프로그램",
     "전기공사",
+    "전기계장공사",
+    "계장설치",
+    "케이블 포설",
     "자동제어",
     "공장자동화",
     "HMI",
@@ -37,15 +41,18 @@ export const metadata: Metadata = {
     "지엠상진",
   ],
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://sangjin-fa.com" },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "ko_KR",
     siteName: "지엠상진",
-    title: "지엠상진 | 전기제어·도장설비·공장자동화 전문",
+    url: SITE_URL,
+    title: "지엠상진 | 도장설비·PLC 자동제어·전기계장공사",
     description:
-      "전기제어시스템·PLC·전기판넬제작·전기공사·도장설비 턴키 전문기업. GM SANGJIN ENGINEERING & ELECTRIC.",
+      "산업용 도장설비, DACRO 코팅라인, PLC·HMI 전기제어반, 전기·계장공사 및 시운전. GM SANGJIN ENGINEERING & ELECTRIC.",
+    images: [{ url: "/sites/gmsangjin/slides/coaterline-1.jpg", width: 1200, height: 630, alt: "지엠상진 산업용 코팅설비" }],
   },
+  twitter: { card: "summary_large_image", images: ["/sites/gmsangjin/slides/coaterline-1.jpg"] },
 };
 
 function JsonLd() {
@@ -64,8 +71,10 @@ function JsonLd() {
     telephone: `+82-10-8228-4252`,
     email: COMPANY.email,
     foundingDate: "2015-12",
+    knowsAbout: ["산업용 도장설비", "액체도장·분체도장", "전처리·전착", "DACRO 다크로 코팅라인", "지오메트 코팅", "PLC 자동제어", "HMI", "전기제어반 제작", "전기·계장공사", "계측기 설치"],
     "@id": `${SITE_URL}/#organization`,
     url: SITE_URL,
+    contactPoint: [{ "@type": "ContactPoint", telephone: COMPANY.tel, contactType: "sales", areaServed: "KR", availableLanguage: ["ko"] }],
     logo: `${SITE_URL}/sites/gmsangjin/slides/logo-small.png`,
   };
   return (

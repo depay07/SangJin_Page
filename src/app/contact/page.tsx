@@ -150,6 +150,7 @@ export default function ContactPage() {
                 <option>DACRO 설비 (SPIN/DIP/TILTI)</option>
                 <option>도장설비 (액체/분체/전착/전처리)</option>
                 <option>자동제어 (판넬/HMI)</option>
+                <option>전기·계장공사 (케이블 포설/계장설치/시운전)</option>
                 <option>기타 문의</option>
               </select>
             </label>

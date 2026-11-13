@@ -1,4 +1,4 @@
-import { pageSeo } from "@/lib/seo";
+import { pageSeo, SITE_URL } from "@/lib/seo";
 import Image from "next/image";
 import { PageHero, SubNav, SectionTitle, BIZ_NAV } from "@/components/sites/gmsangjin/shared";
 import { DACRO_EQUIPMENT } from "@/components/sites/gmsangjin/data";
@@ -6,7 +6,8 @@ import { DACRO_EQUIPMENT } from "@/components/sites/gmsangjin/data";
 export const metadata = pageSeo({
   "path": "/dacro",
   "title": "DACRO 다크로·지오메트 코팅 설비",
-  "description": "DACRO 다크로 표면처리 설비, 지오메트 자동 코팅라인, DIP·SPIN·TILTI 코터, 세척·쇼트·도료공급 설비 및 PLC 자동제어 전문."
+  "description": "DACRO 다크로 표면처리 설비, 지오메트 자동 코팅라인, DIP·SPIN·TILTI 코터, 세척·쇼트·도료공급 설비 및 PLC 자동제어 전문.",
+  keywords: ["다크로 설비","DACRO 코팅설비","지오메트 코팅라인","DIP SPIN 코터","TILTI 코터","다크로 자동라인","표면처리 설비","쇼트블라스트","초음파 세척장비","도료 공급장치"]
 });
 
 const EXTRA = [
@@ -18,9 +19,22 @@ const EXTRA = [
   { title: "HMI 구성", img: "/sites/gmsangjin/slides/hmi-1.png" },
 ];
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${SITE_URL}/dacro/#service`,
+  name: "다크로(DACRO)·지오메트 코팅설비",
+  serviceType: "DACRO·지오메트 표면처리 코팅라인 설계·제작",
+  description: "DIP·SPIN·TILTI 코터, 지오메트 자동 코팅라인, 세척·쇼트·도료공급과 제어 연동",
+  provider: { "@id": `${SITE_URL}/#organization` },
+  areaServed: { "@type": "Country", name: "대한민국" },
+  url: `${SITE_URL}/dacro`,
+};
+
 export default function DacroPage() {
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <PageHero title="DACRO 표면처리" en="Dacro Plant" />
       <SubNav current="/dacro" items={BIZ_NAV} />
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">

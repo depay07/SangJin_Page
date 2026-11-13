@@ -4,152 +4,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { COMPANY, COMPANY_NAV, BIZ_NAV } from "./data";
 
-import { COMPANY_NAV, BIZ_NAV } from "./data";
-
-function DesktopDropdown({
-  label,
-  openKey,
-  current,
-  onEnter,
-  onLeave,
-  items,
-}: {
-  label: string;
-  openKey: string;
-  current: string | null;
-  onEnter: (k: string) => void;
-  onLeave: () => void;
-  items: { label: string; href: string }[];
-}) {
-  const open = current === openKey;
-  return (
-    <div className="relative" onMouseEnter={() => onEnter(openKey)} onMouseLeave={onLeave}>
-      <button
-        type="button"
-        aria-expanded={open}
-        onClick={() => onEnter(open ? "" : openKey)}
-        className="opacity-90 hover:opacity-100 hover:underline underline-offset-8"
-      >
-        {label}
-      </button>
-      {open && (
-        <div className="absolute left-0 top-full pt-2">
-          <div className="w-44 overflow-hidden rounded-lg border border-white/10 bg-[var(--legacy-4)]">
-          {items.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="block px-4 py-2.5 text-sm hover:bg-white/10"
-            >
-              {n.label}
-            </Link>
-          ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+function NavGroup({ name, items }: { name: string; items: {label:string; href:string}[] }) {
+  return <details className="sj-nav-group"><summary>{name}</summary><div className="sj-nav-group__menu">{items.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div></details>;
 }
-
-function Menus() {
-  const [open, setOpen] = useState<string | null>(null);
-  const [mobile, setMobile] = useState(false);
-
-  return (
-    <>
-      <nav className="hidden items-center gap-6 text-[15px] font-medium md:flex">
-          <Link href="/" className="opacity-90 hover:opacity-100 hover:underline underline-offset-8">
-            홈
-          </Link>
-          <DesktopDropdown
-            label="회사소개"
-            openKey="company"
-            current={open}
-            onEnter={setOpen}
-            onLeave={() => setOpen(null)}
-            items={COMPANY_NAV}
-          />
-          <DesktopDropdown
-            label="사업분야"
-            openKey="biz"
-            current={open}
-            onEnter={setOpen}
-            onLeave={() => setOpen(null)}
-            items={BIZ_NAV}
-          />
-          <Link href="/references" className="opacity-90 hover:opacity-100 hover:underline underline-offset-8">
-            시공실적
-          </Link>
-          <Link href="/contact" className="opacity-90 hover:opacity-100 hover:underline underline-offset-8">
-            고객문의
-          </Link>
-        </nav>
-        <div className="relative md:hidden">
-          <button
-            type="button"
-            aria-expanded={mobile}
-            onClick={() => setMobile((v) => !v)}
-            className="rounded-md border border-white/20 px-3 py-2 text-sm"
-          >
-            메뉴
-          </button>
-          {mobile && (
-            <div className="absolute right-0 mt-2 max-h-[70vh] w-48 overflow-y-auto rounded-lg border border-white/10 bg-[var(--legacy-4)]">
-              <Link href="/" className="block px-4 py-3 text-sm font-bold hover:bg-white/10">
-                홈
-              </Link>
-              <p className="border-t border-white/10 px-4 pb-1 pt-3 text-xs text-blue-200">회사소개</p>
-              {COMPANY_NAV.map((n) => (
-                <Link key={n.href} href={n.href} className="block px-4 py-2.5 text-sm hover:bg-white/10">
-                  {n.label}
-                </Link>
-              ))}
-              <p className="border-t border-white/10 px-4 pb-1 pt-3 text-xs text-blue-200">사업분야</p>
-              {BIZ_NAV.map((n) => (
-                <Link key={n.href} href={n.href} className="block px-4 py-2.5 text-sm hover:bg-white/10">
-                  {n.label}
-                </Link>
-              ))}
-              <Link href="/references" className="block border-t border-white/10 px-4 py-3 text-sm font-bold hover:bg-white/10">
-                시공실적
-              </Link>
-              <Link href="/contact" className="block px-4 py-3 text-sm font-bold hover:bg-white/10">
-                고객문의
-              </Link>
-            </div>
-          )}
-        </div>
-    </>
-  );
-}
-
-export function SiteHeader() {
-  // pathname이 바뀌면 Menus를 리마운트해 열린 메뉴를 닫는다
+function Navigation() {
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--legacy-2)]/95 text-white backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Image
-            src="/sites/gmsangjin/slides/logo-small.png"
-            alt="GM상진 로고"
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-full bg-white"
-          />
-          <span className="leading-tight">
-            <span className="block text-lg font-extrabold tracking-tight">
-              지엠상진
-            </span>
-            <span className="block text-[10px] font-medium  text-neutral-300">
-              GM SANGJIN ENGINEERING & ELECTRIC
-            </span>
-          </span>
-        </Link>
-        <Menus key={pathname} />
-      </div>
-    </header>
-  );
+  return <div className="sj-header-navigation" key={pathname}>
+    <nav className="sj-desktop-nav" aria-label="주 메뉴">
+      <Link href="/">홈</Link><NavGroup name="회사소개" items={COMPANY_NAV} /><NavGroup name="사업분야" items={BIZ_NAV} /><Link href="/references">시공실적</Link><Link href="/contact">고객문의</Link>
+    </nav>
+    <Link className="sj-header-cta" href="/contact">견적문의 <ArrowUpRight size={17} aria-hidden="true" /></Link>
+    <button type="button" className="sj-menu-toggle" aria-label={open ? "메뉴 닫기" : "메뉴 열기"} aria-controls="sj-mobile-menu" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X size={26} /> : <Menu size={26} />}</button>
+    {open && <nav id="sj-mobile-menu" className="sj-mobile-menu" aria-label="모바일 메뉴"><Link href="/" onClick={() => setOpen(false)}>홈</Link><span>회사소개</span>{COMPANY_NAV.map(item=><Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>)}<span>사업분야</span>{BIZ_NAV.map(item=><Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>)}<Link href="/references" onClick={() => setOpen(false)}>시공실적</Link><Link href="/contact" onClick={() => setOpen(false)}>고객문의</Link></nav>}
+  </div>;
+}
+export function SiteHeader() {
+  return <header className="sj-site-header">
+    <div className="sj-site-topbar"><div className="sj-container"><span>INDUSTRIAL PLANT ENGINEERING & AUTOMATION</span><a href={`tel:${COMPANY.tel.replaceAll("-", "")}`}>T. {COMPANY.tel}</a></div></div>
+    <div className="sj-container sj-site-header__inner">
+      <Link href="/" className="sj-brand" aria-label="지엠상진 홈페이지">
+        <Image src="/sites/gmsangjin/slides/logo-small.png" alt="" width={44} height={44} className="sj-brand__mark" />
+        <span className="sj-brand__text"><strong>지엠상진</strong><small>GM SANGJIN ENGINEERING</small></span>
+      </Link>
+      <Navigation />
+    </div>
+  </header>;
 }
