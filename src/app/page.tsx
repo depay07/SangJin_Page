@@ -192,7 +192,7 @@ export default function Home() {
 
       <section className="sj-contact-cta">
         <div className="sj-wrap sj-contact-cta__inner">
-          <div><p className="sj-overline sj-overline--light"><span className="sj-line" /> LET'S BUILD YOUR NEXT LINE</p><h2>새로운 생산라인을<br />계획하고 계신가요?</h2><p>설비 종류, 생산 조건, 현장 상황을 알려주시면 프로젝트 범위를 함께 검토합니다.</p></div>
+          <div><p className="sj-overline sj-overline--light"><span className="sj-line" /> LET&apos;S BUILD YOUR NEXT LINE</p><h2>새로운 생산라인을<br />계획하고 계신가요?</h2><p>설비 종류, 생산 조건, 현장 상황을 알려주시면 프로젝트 범위를 함께 검토합니다.</p></div>
           <div className="sj-contact-cta__actions"><a href={`tel:${COMPANY.mobile.replaceAll("-", "")}`} className="sj-contact-cta__phone">{COMPANY.mobile}</a><Link href="/contact" className="sj-button sj-button--solid">프로젝트 문의하기 <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
         </div>
       </section>
