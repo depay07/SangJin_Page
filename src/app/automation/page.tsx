@@ -59,7 +59,7 @@ export default function AutomationPage() {
               {" "}<Link href="/dacro" className="font-bold text-blue-800 underline">DACRO 다크로 코팅라인</Link>, 컨베이어 등
               실제 설비에 필요한 제어반·PLC·HMI를 함께 검토합니다.
             </p>
-            <Link href="/references" className="mt-4 inline-block font-bold text-blue-800 underline">관련 시공실적 확인</Link>
+            <div className="mt-4 flex flex-wrap items-center gap-6"><Link href="/references" className="inline-block font-bold text-blue-800 underline">관련 시공실적 확인</Link><Link href="/electrical-instrumentation" className="inline-block font-bold text-blue-800 underline">현장 전기·계장공사 안내</Link></div>
           </div>
           <Image
             src="/sites/gmsangjin/slides/panel-2.jpg"
