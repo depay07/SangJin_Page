@@ -9,7 +9,7 @@ export const metadata = pageSeo({
   title: "PLC 자동제어·전기판넬 제작·HMI 설계",
   description:
     "PLC 제어프로그램, 전기제어시스템 설계, 전기판넬·제어반 제작, HMI 화면 구성, 현장 전기공사 및 시운전. 도장설비·DACRO 자동제어 전문 지엠상진.",
-  keywords: ["PLC 자동제어", "PLC 프로그램", "전기판넬 제작", "제어반 제작", "전기제어시스템", "HMI", "공장자동화", "시흥 자동제어"],
+  keywords: ["PLC 자동제어","PLC 프로그램 개발","전기제어반 제작","전기판넬 제작","HMI 설계","시흥 자동제어 업체","공장자동화 FA","산업설비 전기공사","제어반 개조"],
 });
 
 const services = [
